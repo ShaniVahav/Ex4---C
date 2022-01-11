@@ -130,7 +130,6 @@ int main() {
             }
             
         }
-        printf("\n");
     }
 
 
