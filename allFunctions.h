@@ -1,8 +1,7 @@
 
 
-#ifndef DESKTOP_MINHEAP_H
-#define DESKTOP_MINHEAP_H
-
+#ifndef DESKTOP_ALLFUNCTION_H
+#define DESKTOP_ALLFUNCTION_H
 
 
 typedef struct GRAPH_NODE_ *pnode;;
@@ -26,13 +25,10 @@ typedef struct minHeap {
     node *elem ;
 } minHeap ;
 
-
 static int minTotalsum = 100000;  /////////when we put "t" , got to remember to update it
 static int  largestDex = 0 ;
-static  int numberOfVertex = 0 ;
+// static  int numberOfVertex = 0 ;
 static  int time = 1 ;
-
-
 
 
 void swap(node *n1, node *n2);
@@ -42,5 +38,16 @@ void heapify(minHeap *hp, int i);
 void deleteMinHeap(minHeap *hp) ;
 
 
+void insert_node_cmd(pnode *head,int node_num, double distance,pedge edges,struct GRAPH_NODE_ *next);
+void delete_node_cmd(pnode* head,int IdDelNode );
+node* getNode(pnode* head,int IdinNewNode);
+void addEdge(pnode pointerToSrc, int dest , double weight, edge* next );
+void deleteFromAlledges(pnode* head, int id);
+// double* dijkstra(pnode* head , int src ,double distance[largestDex+1], int timep,int visited[largestDex+1]);
+int permute(pnode * head,int n, int size, int array[],int numberOfcitis );
+void deleteGraph(pnode* head );
 
-#endif //DESKTOP_MINHEAP_H
+
+
+
+#endif //DESKTOP_ALLFUNCTION_H

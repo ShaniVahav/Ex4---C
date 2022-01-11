@@ -1,10 +1,7 @@
+#include "allFunctions.h"
 #include "stdlib.h"
 #include "stdio.h"
 #include "stdbool.h"
-#include "GRAPH.c"
-
-
-
 
 
 int main() {

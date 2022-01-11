@@ -2,14 +2,21 @@ CC = gcc
 FLAGS = -g -Wall
 AR=ar
 
-all: prog
+all: graph lib
+lib: lib_allFaunction.a
+graph: main.o minheap.o GRAPH.o
+	$(CC) $(FLAGS) -o graph main.o minheap.o GRAPH.o
 
-prog: main.o minheap.o allFunction.h
-	$(CC) $(FLAGS) -o graph main.o minheap.o
-main.o: main.c allFunction.h
+main.o: main.c allFunctions.h
 	$(CC) $(FLAGS) -c main.c
-minheap.o: minheap.c minheap.h
+
+minheap.o: minheap.c allFunctions.h
 	$(CC) $(FLAGS) -c minheap.c
+GRAPH.o: GRAPH.c allFunctions.h
+	$(CC) $(FLAGS) -c GRAPH.c
+
+lib_allFaunction.a: minheap.o GRAPH.o
+	$(AR) -rcs lib_allFaunction.a minheap.o GRAPH.o
 
 .PHONY: clean all
 

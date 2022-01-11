@@ -1,11 +1,7 @@
-#include "stdlib.h"
+#include <stdlib.h>
 #include "stdio.h"
 #include "stdbool.h"
-#include "allFunction.h"
-
-
-
-
+#include "allFunctions.h"
 
 
 void insert_node_cmd(pnode *head,int node_num, double distance,pedge edges,struct GRAPH_NODE_ *next){
