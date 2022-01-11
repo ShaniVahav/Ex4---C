@@ -187,13 +187,14 @@ double tsp(pnode* head,int order[],int numberOfCitis ) {
 ////// size is built in
 //// array is the citis array
 ////// numberOfcitis is the size of the array
-    int permute(pnode * head,int n, int size, int array[],int numberOfcitis ) {
+int permute(pnode * head,int n, int size, int array[],int numberOfcitis ) {
     int tmp;int currentsum = 0;int j;int i;
     if (n == 1) {
         currentsum = tsp(head, array, numberOfcitis);
         if (minTotalsum > currentsum && currentsum!=-1)
             minTotalsum = currentsum;
-    } else {
+    }
+    else {
         for (i = 0; i < n; i++) {
             permute(head, n - 1, size, array, numberOfcitis);
             j = (n % 2 == 1) ? n - 1 : 0;
@@ -201,13 +202,14 @@ double tsp(pnode* head,int order[],int numberOfCitis ) {
             array[n - 1] = array[j];
             array[j] = tmp;
         }
-        if(minTotalsum != 100000)
-             // printf("min total sum is :  %d\n ", minTotalsum);
+        if(minTotalsum != 100000){
             return minTotalsum;
-        
+        }
+        else{
             return -1;
-  //                  printf("-1");
+        }
     }
+    return minTotalsum;
 }
 
 void deleteGraph(pnode* head ) {

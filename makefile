@@ -3,7 +3,7 @@ FLAGS = -g -Wall
 AR=ar
 
 all: graph lib
-lib: lib_allFaunction.a
+lib: lib_allFaunctions.a
 graph: main.o minheap.o GRAPH.o
 	$(CC) $(FLAGS) -o graph main.o minheap.o GRAPH.o
 
@@ -15,8 +15,8 @@ minheap.o: minheap.c allFunctions.h
 GRAPH.o: GRAPH.c allFunctions.h
 	$(CC) $(FLAGS) -c GRAPH.c
 
-lib_allFaunction.a: minheap.o GRAPH.o
-	$(AR) -rcs lib_allFaunction.a minheap.o GRAPH.o
+lib_allFaunctions.a: minheap.o GRAPH.o
+	$(AR) -rcs lib_allFaunctions.a minheap.o GRAPH.o
 
 .PHONY: clean all
 

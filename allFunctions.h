@@ -3,6 +3,7 @@
 #ifndef DESKTOP_ALLFUNCTION_H
 #define DESKTOP_ALLFUNCTION_H
 
+#include "stdbool.h"
 
 typedef struct GRAPH_NODE_ *pnode;;
 
@@ -43,7 +44,7 @@ void delete_node_cmd(pnode* head,int IdDelNode );
 node* getNode(pnode* head,int IdinNewNode);
 void addEdge(pnode pointerToSrc, int dest , double weight, edge* next );
 void deleteFromAlledges(pnode* head, int id);
-// double* dijkstra(pnode* head , int src ,double distance[largestDex+1], int timep,int visited[largestDex+1]);
+double* dijkstra(pnode* head , int src ,double distance[largestDex+1], int timep,bool visited[largestDex+1]);
 int permute(pnode * head,int n, int size, int array[],int numberOfcitis );
 void deleteGraph(pnode* head );
 
