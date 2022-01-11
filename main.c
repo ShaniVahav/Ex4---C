@@ -3,8 +3,42 @@
 #include "stdbool.h"
 #include "allFunction.h"
 
-void readTheInput(char* str, pnode *head){
-  int i = 0;
+
+
+
+
+int main() {
+    pnode begin = NULL;
+    pnode *head = &begin;
+    int i = 0;
+    int size = 0;
+    int capacity = 25;
+    char *str = NULL;//a pointer to an array of chars.
+    char *temp = NULL;
+    str = malloc(capacity * sizeof(char));
+    char current = 0;
+    while (current != '\n') {
+        scanf("%c", &current);
+        if (size == capacity - 1) {
+            if (current == 32)
+                continue;
+            str = realloc(str, capacity + 10);
+            if (str == NULL) {  /////////////// just in case
+                free(str);
+                return 1;
+            }
+            capacity += 10;
+        }
+        if (current != 32) {
+            str[i] = current;
+            i++;
+            size++;
+        }       ///////////A 4 n 0 2 5 3 3 n 2 0 4 1 1 n 1 3 7 0 2 n 3 T 3 2 1 3 S 2 0
+    }
+        str[i] = '\n';
+
+
+        i = 0;
         while (str[i] != '\n') {
             char c = str[i];
             if (c == 'A') {
@@ -99,43 +133,8 @@ void readTheInput(char* str, pnode *head){
             }
 
         }
-}
-
-
-
-int main() {
-    pnode begin = NULL;
-    pnode *head = &begin;
-    int i = 0;
-    int size = 0;
-    int capacity = 25;
-    char *str = NULL; //a pointer to an array of chars.
-    char *temp = NULL;
-    str = malloc(capacity * sizeof(char));
-    char current = 0;
-    while (current != '\n') {
-        scanf("%c", &current);
-        if (size == capacity - 1) {
-            if (current == 32)
-                continue;
-            str = realloc(str, capacity + 10);
-            if (str == NULL) {  // just in case
-                free(str);
-                return 1;
-            }
-            capacity += 10;
-        }
-        if (current != 32) {
-            str[i] = current;
-            i++;
-            size++;
-        }       
     }
 
-    str[i] = '\n';
-
-    readTheInput(str, head);
-}
 
 
 
