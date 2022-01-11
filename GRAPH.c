@@ -60,22 +60,18 @@ void delete_node_cmd(pnode* head,int IdDelNode ) {
     }
 }
 node* getNode(pnode* head,int IdinNewNode) {
-    pnode current = *head; float o ;
+    pnode current = *head;
     while (current != NULL && current->node_num != IdinNewNode) {
         current = current->next;
     }
-    if (current == NULL)
-  //      printf("no such id ");
-         o = 0;
-    else
-        return current;
-    return NULL;
+    
+    return current;
 }
 
 void addEdge(pnode pThisNode, int dest , double weight, edge* next ) {
      if(pThisNode->edges == NULL) {
             edge *currentEdge = (edge *) malloc(sizeof(edge));
-            currentEdge->dest - dest;
+            // currentEdge->dest - dest;
             currentEdge->next = NULL;
             currentEdge->dest = dest;
             currentEdge->weight = weight;
@@ -125,7 +121,7 @@ void deleteFromAlledges(pnode* head, int id) {
 /////double (* distance)[largestDex+1]
 double* dijkstra(pnode* head , int src ,double distance[largestDex+1], int timep,bool visited[largestDex+1]){
   //  printf("%d\n",timep);
-    pnode begin = *head;
+   // pnode begin = *head;
     for(int i = 0 ; i < largestDex+1; i ++){
         visited[i] = false;
         distance[i] =100000;
@@ -176,13 +172,13 @@ double tsp(pnode* head,int order[],int numberOfCitis ) {
    // printf("nu");
     double sum = 0;      //////  sum of this path;   ///// for sending to dijkstra
     for (int i = 0; i < numberOfCitis - 1; i++) {
-        int from = order[i];
-        int to = order[i + 1];
+       // int from = order[i];
+        // int to = order[i + 1];
         double distance[largestDex + 1];
         bool visited[largestDex+1];
         double *arr = dijkstra(head, order[i], distance,time++,visited);
         int realNumber = order[i+1];
-        int w = arr[realNumber];/////returning arr of double
+       // int w = arr[realNumber];/////returning arr of double
         double next = arr[realNumber];      ///
         if (next == 100000)
             return -1;
@@ -212,11 +208,12 @@ double tsp(pnode* head,int order[],int numberOfCitis ) {
         if(minTotalsum != 100000)
              // printf("min total sum is :  %d\n ", minTotalsum);
             return minTotalsum;
-        else
+        
             return -1;
   //                  printf("-1");
     }
 }
+
 void deleteGraph(pnode* head ) {
     pnode current = *head;
     while (current != NULL) {

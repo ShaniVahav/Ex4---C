@@ -70,8 +70,8 @@ void insertNode(minHeap *hp, node* n) {
         hp->elem = malloc(sizeof(node)) ;
     }
 
-    ;
-    int data = n->distance ;
+    
+  
 
     int i = (hp->size)++ ;
     while(i && n->distance < hp->elem[PARENT(i)].distance) {

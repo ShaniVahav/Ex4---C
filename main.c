@@ -1,7 +1,7 @@
 #include "stdlib.h"
 #include "stdio.h"
 #include "stdbool.h"
-#include "allFunction.h"
+#include "GRAPH.c"
 
 
 
@@ -14,7 +14,7 @@ int main() {
     int size = 0;
     int capacity = 25;
     char *str = NULL;//a pointer to an array of chars.
-    char *temp = NULL;
+   // char *temp = NULL;
     str = malloc(capacity * sizeof(char));
     char current = 0;
     while (current != '\n') {
@@ -44,7 +44,7 @@ int main() {
             if (c == 'A') {
                 deleteGraph(head);
                 i++;
-                int numberOfvertex = str[i] - '0'; //////// not used
+                // int numberOfvertex = str[i] - '0'; //////// not used
                 i++;
                 bool flag = true;
                 int dexOfnewNode = 0 ;

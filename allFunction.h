@@ -1,6 +1,4 @@
-//
-// Created by barse on 1/7/2022.
-//
+
 
 #ifndef DESKTOP_ALLFUNCTION_H
 #define DESKTOP_ALLFUNCTION_H
@@ -29,7 +27,7 @@ typedef struct minHeap {
 
 static int minTotalsum = 100000;  /////////when we put "t" , got to remember to update it
 static int  largestDex = 0 ;
-static  int numberOfVertex = 0 ;
+// static  int numberOfVertex = 0 ;
 static  int time = 1 ;
 
 
