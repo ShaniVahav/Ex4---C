@@ -128,8 +128,10 @@ int main() {
                 c = str[i];
 
             }
-
+            
         }
+        printf("\n");
+        
     }
 
 
