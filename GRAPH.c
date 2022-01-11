@@ -3,6 +3,7 @@
 #include "stdbool.h"
 #include "allFunctions.h"
 
+static  int time = 1 ;
 
 void insert_node_cmd(pnode *head,int node_num, double distance,pedge edges,struct GRAPH_NODE_ *next){
     node* inNewNode = (node*) malloc(sizeof(node));
