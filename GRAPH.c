@@ -6,6 +6,7 @@
 static  int time = 1 ;
 
 void insert_node_cmd(pnode *head,int node_num, double distance,pedge edges,struct GRAPH_NODE_ *next){
+
     node* inNewNode = (node*) malloc(sizeof(node));
     inNewNode->next = NULL;
     inNewNode->edges = NULL;
@@ -22,6 +23,7 @@ void insert_node_cmd(pnode *head,int node_num, double distance,pedge edges,struc
         (*inNewNode).next = temp;
     }
 }
+
 void delete_node_cmd(pnode* head,int IdDelNode ) {
     node *current = *head;
     if (current == NULL) {
@@ -118,7 +120,7 @@ void deleteFromAlledges(pnode* head, int id) {
 /////double (* distance)[largestDex+1]
 double* dijkstra(pnode* head , int src ,double distance[largestDex+1], int timep,bool visited[largestDex+1]){
   //  printf("%d\n",timep);
-   // pnode begin = *head;
+  // pnode begin = *head;
     for(int i = 0 ; i < largestDex+1; i ++){
         visited[i] = false;
         distance[i] =100000;

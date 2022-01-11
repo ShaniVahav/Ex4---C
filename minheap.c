@@ -35,7 +35,7 @@ typedef struct minHeap {
 /*
     Function to initialize the min heap with size = 0
 */
-minHeap initMinHeap(int size) {
+minHeap initMinHeap() {
     minHeap hp ;
     hp.size = 0 ;
     return hp ;
@@ -70,9 +70,6 @@ void insertNode(minHeap *hp, node* n) {
         hp->elem = malloc(sizeof(node)) ;
     }
 
-    
-  
-
     int i = (hp->size)++ ;
     while(i && n->distance < hp->elem[PARENT(i)].distance) {
         hp->elem[i] = hp->elem[PARENT(i)] ;
@@ -80,8 +77,6 @@ void insertNode(minHeap *hp, node* n) {
     }
     hp->elem[i] = *n ;
 }
-
-
 
 void deleteNode(minHeap *hp) {
 
@@ -98,5 +93,4 @@ void deleteNode(minHeap *hp) {
 
 void deleteMinHeap(minHeap *hp) {
     free(hp->elem) ;
-
 }

@@ -95,7 +95,7 @@ int main() {
                 i++;
                 c = str[i];
             }
-            if (c == 'S') {
+            if (c == 'S' || c == 'P') {
                 i++;
                 int src = str[i] - '0';
                 double distance[largestDex+1];
@@ -130,6 +130,7 @@ int main() {
             }
             
         }
+        deleteGraph(head);
     }
 
 
