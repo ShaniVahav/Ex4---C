@@ -78,7 +78,7 @@ int main() {
                 i++;
                 delete_node_cmd(head, numberOfdeletedB);
                 insert_node_cmd(head, numberOfdeletedB,100000,NULL,NULL);
-                while (str[i] < 59 && str[i] > 47) {
+                while (str[i] < 58 && str[i] > 47) {
                     int dest = str[i] - '0';
                     int w = str[i + 1] - '0';
                     pnode pointer = getNode(head,numberOfdeletedB);
@@ -131,7 +131,6 @@ int main() {
             
         }
         printf("\n");
-        
     }
 
 
