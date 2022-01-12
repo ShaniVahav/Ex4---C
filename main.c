@@ -102,7 +102,7 @@ int main() {
                 i++;
                 int dest = str[i] - '0';
                 int answer = dijkstra(head, src, dest);
-                printf("Dijsktra shortest path: %d\n", answer);
+                printf("Dijsktra shortest path: %d \n", answer);
 
                 i++;
                 c = str[i];
@@ -124,10 +124,10 @@ int main() {
                 (*head)->ans = 100000;
                  permute(head, array, 0 , numberofNodes-1 );
                 if((*head)->ans >= 100000) {
-                    printf("TSP shortest path: -1\n");
+                    printf("TSP shortest path: -1 \n");
                 }
                 else {
-                    printf("TSP shortest path: %d\n", (*head)->ans);
+                    printf("TSP shortest path: %d \n", (*head)->ans);
                 }
                 (*head)->ans = 100000;
                 c = str[i];
