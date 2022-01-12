@@ -4,19 +4,17 @@ AR=ar
 
 all: graph lib
 lib: lib_allFaunctions.a
-graph: main.o minheap.o GRAPH.o
-	$(CC) $(FLAGS) -o graph main.o minheap.o GRAPH.o
+graph: main.o GRAPH.o
+	$(CC) $(FLAGS) -o graph main.o GRAPH.o
 
-main.o: main.c allFunctions.h
+main.o: main.c
 	$(CC) $(FLAGS) -c main.c
 
-minheap.o: minheap.c allFunctions.h
-	$(CC) $(FLAGS) -c minheap.c
-GRAPH.o: GRAPH.c allFunctions.h
+GRAPH.o: GRAPH.c
 	$(CC) $(FLAGS) -c GRAPH.c
 
-lib_allFaunctions.a: minheap.o GRAPH.o
-	$(AR) -rcs lib_allFaunctions.a minheap.o GRAPH.o
+lib_allFaunctions.a: GRAPH.o
+	$(AR) -rcs lib_allFaunctions.a GRAPH.o
 
 .PHONY: clean all
 

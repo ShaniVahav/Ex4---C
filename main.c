@@ -1,7 +1,10 @@
-#include "allFunctions.h"
 #include "stdlib.h"
 #include "stdio.h"
 #include "stdbool.h"
+#include "allFunction.h"
+
+///////////////////A 4 n 0 2 5 3 3 n 2 0 4 1 1 n 1 3 7 0 2 n 3 T 3 2 1 3 S 2 0
+
 
 
 int main() {
@@ -11,7 +14,6 @@ int main() {
     int size = 0;
     int capacity = 25;
     char *str = NULL;//a pointer to an array of chars.
-   // char *temp = NULL;
     str = malloc(capacity * sizeof(char));
     char current = 0;
     while (current != '\n') {
@@ -41,7 +43,6 @@ int main() {
             if (c == 'A') {
                 deleteGraph(head);
                 i++;
-                // int numberOfvertex = str[i] - '0'; //////// not used
                 i++;
                 bool flag = true;
                 int dexOfnewNode = 0 ;
@@ -78,7 +79,7 @@ int main() {
                 i++;
                 delete_node_cmd(head, numberOfdeletedB);
                 insert_node_cmd(head, numberOfdeletedB,100000,NULL,NULL);
-                while (str[i] < 58 && str[i] > 47) {
+                while (str[i] < 59 && str[i] > 47) {
                     int dest = str[i] - '0';
                     int w = str[i + 1] - '0';
                     pnode pointer = getNode(head,numberOfdeletedB);
@@ -95,23 +96,20 @@ int main() {
                 i++;
                 c = str[i];
             }
-            if (c == 'S' || c == 'P') {
+            if (c == 'S') {
                 i++;
                 int src = str[i] - '0';
-                double distance[largestDex+1];
-                bool visited[largestDex+1];
-                double *arr = dijkstra(head, src, distance, 0,visited);
                 i++;
                 int dest = str[i] - '0';
-                int x = arr[dest];
-                printf("Dijsktra shortest path: %d\n", x);
+                int answer = dijkstra(head, src, dest);
+                printf("Dijsktra shortest path: %d\n", answer);
 
                 i++;
                 c = str[i];
             }
 
             if (c == 'T') {
-                minTotalsum = 100000;                      /////// update befure tsp
+                /////// update befure tsp
                 i++;
                 int numberofNodes = str[i] - '0';
                 i++;
@@ -123,14 +121,23 @@ int main() {
                     array[j] = idOfCity;
                 }
                 i = i + j ;
-                int ans = permute(head, 3, 3, array, 3);
-                printf("TSP shortest path: %d\n", ans);
+                (*head)->ans = 100000;
+         
+                 permute(head, array, 0 , numberofNodes-1 );
+                if((*head)->ans >= 100000) {
+                    printf("TSP shortest path: -1");
+                }
+                else {
+                    printf("TSP shortest path: %d\n", (*head)->ans);
+                }
+                (*head)->ans = 100000;
                 c = str[i];
-
             }
-            
+
+
         }
-        deleteGraph(head);
+   
+    deleteGraph(head);
     }
 
 

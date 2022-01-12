@@ -1,19 +1,20 @@
-#include <stdlib.h>
+#include "stdlib.h"
 #include "stdio.h"
 #include "stdbool.h"
-#include "allFunctions.h"
+#include "allFunction.h"
 
-static  int time = 1 ;
+
+
+static int largestIndex = 100000;
 
 void insert_node_cmd(pnode *head,int node_num, double distance,pedge edges,struct GRAPH_NODE_ *next){
-
     node* inNewNode = (node*) malloc(sizeof(node));
     inNewNode->next = NULL;
     inNewNode->edges = NULL;
     inNewNode->distance = 100000;
     inNewNode->node_num = node_num;
-    if(inNewNode->node_num > largestDex)
-        largestDex =inNewNode->node_num;
+    if(inNewNode->node_num > largestIndex)
+        largestIndex =inNewNode->node_num;
     if(*head == NULL) {
         *head = inNewNode;
     }
@@ -23,7 +24,6 @@ void insert_node_cmd(pnode *head,int node_num, double distance,pedge edges,struc
         (*inNewNode).next = temp;
     }
 }
-
 void delete_node_cmd(pnode* head,int IdDelNode ) {
     node *current = *head;
     if (current == NULL) {
@@ -63,14 +63,16 @@ node* getNode(pnode* head,int IdinNewNode) {
     while (current != NULL && current->node_num != IdinNewNode) {
         current = current->next;
     }
+    if (current == NULL)
+        return NULL;
+
+  return current;
     
-    return current;
 }
 
 void addEdge(pnode pThisNode, int dest , double weight, edge* next ) {
      if(pThisNode->edges == NULL) {
             edge *currentEdge = (edge *) malloc(sizeof(edge));
-            // currentEdge->dest - dest;
             currentEdge->next = NULL;
             currentEdge->dest = dest;
             currentEdge->weight = weight;
@@ -117,109 +119,137 @@ void deleteFromAlledges(pnode* head, int id) {
 
     }
 }
-/////double (* distance)[largestDex+1]
-double* dijkstra(pnode* head , int src ,double distance[largestDex+1], int timep,bool visited[largestDex+1]){
-  //  printf("%d\n",timep);
-  // pnode begin = *head;
-    for(int i = 0 ; i < largestDex+1; i ++){
-        visited[i] = false;
-        distance[i] =100000;
+ bool stop(bool Visited[largestIndex+1]){
+    for(int i = 0 ; i < largestIndex+1 ; i ++){
+        if(Visited[i] == false)
+            return false;    ///// dont stop the loop
     }
-    minHeap* h = (minHeap*)malloc(sizeof(minHeap));
-    h->elem =NULL;
-    h->size = 0 ;
-    node* pToCurrent = getNode(head, src);
-    pToCurrent->distance = 0;
-    insertNode( h, pToCurrent);
-    // *(distance[src]) = 0 ;
-    while (h->size !=0) {
-        node current = h->elem[0];
-        deleteNode(h); /////////////////// 205feb218a0
-        if (visited[current.node_num] == false){
-            visited[src] =true;
-            edge *currentEdge = current.edges;
-            while (currentEdge != NULL) {
-                node *pTocurrentDest = getNode(head, currentEdge->dest);
-                double x = pTocurrentDest->distance;   // ((*distance)[currentDest.node_num]);
-                double y = current.distance; // *(distance[current.node_num]);
-                double z = currentEdge->weight;
-                if (x > y + z) {
-                    // (*(distance[currentDest.node_num]) = *(distance[current.node_num]) + currentEdge->weight);
-                    //currentDest.distance =  *(distance[currentDest.node_num]);
-                    pTocurrentDest->distance = current.distance + currentEdge->weight;
-                    distance[pTocurrentDest->node_num] = pTocurrentDest->distance;
-                    insertNode(h, pTocurrentDest);
+     return true;
+}
+int dijkstra(pnode* head, int src_id, int dest_id){
+    int len_array = largestIndex+1;
+    int d[len_array];
+    int phi[len_array];
+    bool visited[len_array];
+
+    for (int i = 0; i < len_array; ++i) {
+        phi[i] = 0;
+        visited[i] = false;
+        d[i] = 1000;
+    }
+    d[src_id] = 0;
+    bool allVisited = false;
+    int mindis = src_id;
+    while (allVisited == false){
+        node current;
+        for (int i = 0; i < len_array ; ++i) {
+            if(d[i] < d[mindis] && visited[i] == false){
+                mindis = i;
+            }
+            current = *getNode(head, mindis);
+            pedge edges = current.edges;
+            while (edges != NULL){
+                if(d[mindis] + edges->weight < d[edges->dest]) {
+                    d[edges->dest] = d[mindis] + edges->weight;
+                    phi[edges->dest] = mindis;
                 }
-                currentEdge = currentEdge->next;
+                edges = edges->next;
+            }
+            visited[mindis] = true;
+
+            // check if all visited
+            allVisited = true;
+            for (int j = 0; j < len_array; ++j) {
+                if(visited[j] == false){
+                    // check if is an actual node
+                    node* n = *head;
+                    while(n != NULL) {
+                        if(n->node_num == j){
+                            allVisited = false;
+                            mindis = j;
+                            break;
+                        }
+                        else{
+                            n = n->next;
+                        }
+                    }
+
+                }
             }
         }
     }
-    for(int i =0 ; i < largestDex+1 ; i ++){
-      //  printf("%d is %f:\n",i,distance[i]);
-    }
-    deleteMinHeap(h);
-    free(h);
-    pnode current = *head;
-    while (current !=NULL){
-        current->distance = 100000;
-        current = current->next;
-    }
-    return distance;
-    }
-
-double tsp(pnode* head,int order[],int numberOfCitis ) {
-   // printf("nu");
-    double sum = 0;      //////  sum of this path;   ///// for sending to dijkstra
-    for (int i = 0; i < numberOfCitis - 1; i++) {
-       // int from = order[i];
-        // int to = order[i + 1];
-        double distance[largestDex + 1];
-        bool visited[largestDex+1];
-        double *arr = dijkstra(head, order[i], distance,time++,visited);
-        int realNumber = order[i+1];
-       // int w = arr[realNumber];/////returning arr of double
-        double next = arr[realNumber];      ///
-        if (next == 100000)
+    int sum = 0, w;
+    int i = dest_id;
+    while (i != src_id){
+        pedge pre_node_edges_node = getNode(head, phi[i])->edges;
+        while (pre_node_edges_node != NULL){
+            if(pre_node_edges_node->dest == i){
+                w = pre_node_edges_node->weight;
+                break;
+            }
+            pre_node_edges_node = pre_node_edges_node->next;
+        }
+        if(pre_node_edges_node == NULL){
             return -1;
-         sum += next;
+        }
+        sum += w;
+        i = phi[i];
     }
     return sum;
-
 }
-/////  n is built in
-////// size is built in
-//// array is the citis array
-////// numberOfcitis is the size of the array
-int permute(pnode * head,int n, int size, int array[],int numberOfcitis ) {
-    int tmp;int currentsum = 0;int j;int i;
-    if (n == 1) {
-        currentsum = tsp(head, array, numberOfcitis);
-        if (minTotalsum > currentsum && currentsum!=-1)
-            minTotalsum = currentsum;
+void swap(int *x,  int *y){
+int temp;
+temp = *x;
+*x = *y;
+*y = temp;
+}
+/////////////A 4 n 0 2 5 3 3 n 2 0 4 1 1 n 1 3 7 0 2 n 3 T 3 2 1 3 S 2 0
+
+ void permute(pnode* head,int citis [] , int l , int r){
+    // printf(" athzeret is  : %d",athzeret);
+    int i;
+    if (l == r) {
+        tsp(head,  citis, r);  ////// citis are order now
     }
-    else {
-        for (i = 0; i < n; i++) {
-            permute(head, n - 1, size, array, numberOfcitis);
-            j = (n % 2 == 1) ? n - 1 : 0;
-            tmp = array[n - 1];
-            array[n - 1] = array[j];
-            array[j] = tmp;
-        }
-        if(minTotalsum != 100000){
-            return minTotalsum;
-        }
-        else{
-            return -1;
+    else{
+        for (i = l; i <= r; i++){
+            swap((citis+l), (citis+i));
+            (permute(head,citis, l+1, r));
+            swap((citis+l), (citis+i));
         }
     }
-    return minTotalsum;
 }
 
+
+
+
+void tsp(pnode* head,int order[],int numberOfCitisMinus1) {
+   // printf("nu");
+    double sum = 0;      //////  sum of this path;   ///// for sending to dijkstra
+    for (int i = 0; i < numberOfCitisMinus1; i++) {
+        int answer = dijkstra(head, order[i],order[i+1]);
+        if(answer == -1 ) {
+            answer = answer + 100000;
+            sum += answer;
+        }
+        else
+           sum += answer;
+    }
+    if((*head)->ans > sum)
+        (*head)->ans   = sum;
+
+
+}
 void deleteGraph(pnode* head ) {
     pnode current = *head;
     while (current != NULL) {
         int number = current->node_num;
         current = current->next;
+        if ((*head)->next == NULL){
+            free(*head);
+            (*head) = NULL;
+            return;
+    }
         delete_node_cmd(head, number);
         deleteFromAlledges(head, number);
     }
