@@ -3,7 +3,7 @@ FLAGS = -g -Wall
 AR=ar
 
 all: graph lib
-lib: lib_allFaunctions.a
+lib: lib_allFaunction.a
 graph: main.o GRAPH.o
 	$(CC) $(FLAGS) -o graph main.o GRAPH.o
 
@@ -13,8 +13,8 @@ main.o: main.c
 GRAPH.o: GRAPH.c
 	$(CC) $(FLAGS) -c GRAPH.c
 
-lib_allFaunctions.a: GRAPH.o
-	$(AR) -rcs lib_allFaunctions.a GRAPH.o
+lib_allFaunction.a: GRAPH.o
+	$(AR) -rcs lib_allFaunction.a GRAPH.o
 
 .PHONY: clean all
 

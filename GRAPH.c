@@ -1,11 +1,11 @@
 #include "stdlib.h"
 #include "stdio.h"
 #include "stdbool.h"
-#include "allFunctions.h"
+#include "allFunction.h"
 
 
+static int  largestIndex = 0;
 
-static int largestIndex = 100000;
 
 void insert_node_cmd(pnode *head,int node_num, double distance,pedge edges,struct GRAPH_NODE_ *next){
     node* inNewNode = (node*) malloc(sizeof(node));
@@ -64,15 +64,16 @@ node* getNode(pnode* head,int IdinNewNode) {
         current = current->next;
     }
     if (current == NULL)
-        return NULL;
-
-  return current;
-    
+        return NULL;     
+    else
+        return current;
+    return NULL;
 }
 
 void addEdge(pnode pThisNode, int dest , double weight, edge* next ) {
      if(pThisNode->edges == NULL) {
             edge *currentEdge = (edge *) malloc(sizeof(edge));
+        
             currentEdge->next = NULL;
             currentEdge->dest = dest;
             currentEdge->weight = weight;
@@ -126,6 +127,7 @@ void deleteFromAlledges(pnode* head, int id) {
     }
      return true;
 }
+/////double (* distance)[largestIndex+1]
 int dijkstra(pnode* head, int src_id, int dest_id){
     int len_array = largestIndex+1;
     int d[len_array];
