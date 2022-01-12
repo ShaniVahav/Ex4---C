@@ -12,7 +12,7 @@ int main() {
     pnode *head = &begin;
     int i = 0;
     int size = 0;
-    int capacity = 25;
+    int capacity = 50;
     char *str = NULL;//a pointer to an array of chars.
     str = malloc(capacity * sizeof(char));
     char current = 0;
