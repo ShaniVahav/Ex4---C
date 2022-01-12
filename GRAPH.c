@@ -34,10 +34,11 @@ void delete_node_cmd(pnode* head,int IdDelNode ) {
             edge *temp = currentEdge;
             currentEdge = currentEdge->next;
             free(temp);
+            temp = NULL;
         }
-        current =current->next;
+        current = current->next;
         free((*head));
-        (*head) = current->next;
+        (*head) = current;
     } else {
         node *prevToCurrent = current;
         current = current->next;
@@ -245,6 +246,7 @@ void tsp(pnode* head,int order[],int numberOfCitisMinus1) {
 void deleteGraph(pnode* head ) {
     pnode current = *head;
     while (current != NULL) {
+        current = *head;
         int number = current->node_num;
         current = current->next;
         delete_node_cmd(head, number);

@@ -132,10 +132,7 @@ int main() {
                 (*head)->ans = 100000;
                 c = str[i];
             }
-
-
         }
-    printf("\n");
     deleteGraph(head);
     }
 
