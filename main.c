@@ -124,7 +124,7 @@ int main() {
                 (*head)->ans = 100000;
                  permute(head, array, 0 , numberofNodes-1 );
                 if((*head)->ans >= 100000) {
-                    printf("TSP shortest path: -1");
+                    printf("TSP shortest path: -1\n");
                 }
                 else {
                     printf("TSP shortest path: %d\n", (*head)->ans);
@@ -135,7 +135,7 @@ int main() {
 
 
         }
-
+    printf("\n");
     deleteGraph(head);
     }
 
