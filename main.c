@@ -134,6 +134,7 @@ int main() {
             }
         }
     deleteGraph(head);
+    free(str);
     }
 
 
