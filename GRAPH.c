@@ -250,7 +250,7 @@ void deleteGraph(pnode* head ) {
         int number = current->node_num;
         current = current->next;
         delete_node_cmd(head, number);
-        deleteFromAlledges(head, number);
+       // deleteFromAlledges(head, number);
     }
 }
 
