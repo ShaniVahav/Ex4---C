@@ -247,11 +247,6 @@ void deleteGraph(pnode* head ) {
     while (current != NULL) {
         int number = current->node_num;
         current = current->next;
-        if ((*head)->next == NULL){
-            free(*head);
-            (*head) = NULL;
-            return;
-    }
         delete_node_cmd(head, number);
         deleteFromAlledges(head, number);
     }
